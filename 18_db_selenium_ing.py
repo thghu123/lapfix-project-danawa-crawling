@@ -94,7 +94,7 @@ for pd in product :
     #end = list[0].find(".",1) 오류
     LAPTOP_MONITORSIZE = list[0][start+1:(len(list[0])-5)] #인치만 표현한다.
     LAPTOP_IMAGEURL = img_url
-    
+    #print(img_url)
     #print("{} {} {} {} {} {} {}".format(LAPTOP_NAME,CPU_NAME,GPU_NAME,LAPTOP_MEMORY,LAPTOP_OS,LAPTOP_MONITORSIZE,LAPTOP_IMAGEURL))
     #출력 테스트 성공
 
@@ -110,12 +110,13 @@ for pd in product :
 
 
 
-    sql = "insert into laptop values(:1,:2,:3,:4,:5,:6,:7)"
+    sql = "insert into laptop (LAPTOP_NAME,CPU_NAME,GPU_NAME,LAPTOP_MEMORY,LAPTOP_OS,LAPTOP_MONITORSIZE,LAPTOP_IMAGEURL) values(:1,:2,:3,:4,:5,:6,:7)"
     data = (LAPTOP_NAME,CPU_NAME,GPU_NAME,LAPTOP_MEMORY,LAPTOP_OS,LAPTOP_MONITORSIZE,LAPTOP_IMAGEURL)
     cursor.execute(sql,data)
     cnt = cnt + 1 #n개 데이터만 빼오기 위함.
 
 
+db.commit()
 
 sql = "select * from laptop"
 cursor.execute(sql) #laptopOS의 이름이 너무 길다 maximum:20
