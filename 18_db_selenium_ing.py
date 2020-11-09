@@ -37,11 +37,11 @@ product = soup.find_all("li", attrs = {"class":"prod_item prod_layer"})
 time.sleep(2)
 
 cnt = 0
-db=cx_Oracle.connect("class11/class11@nullmaster.iptime.org:1521/orcl")
+db=cx_Oracle.connect("class13/class13@nullmaster.iptime.org:1521/orcl")
 cursor = db.cursor()
 
 for pd in product :
-    if(cnt == 3):
+    if(cnt == 10):
         break
 
     title = pd.find("p", attrs = {"class":"prod_name"}).get_text().replace("\n","").replace("\t","").replace("인기 순위","").strip()
@@ -118,21 +118,21 @@ for pd in product :
 
 db.commit()
 
-sql = "select * from laptop"
-cursor.execute(sql) #laptopOS의 이름이 너무 길다 maximum:20
+# sql = "select * from laptop"
+# cursor.execute(sql) #laptopOS의 이름이 너무 길다 maximum:20
 
-for row in cursor:
-    for i in range(len(row)):
-        if i==3:
-            if(row[3] != None):
-                description = row[3].read()
-        print(row[i],end="  ")
-    print("")
+# for row in cursor:
+#     for i in range(len(row)):
+#         if i==3:
+#             if(row[3] != None):
+#                 description = row[3].read()
+#         print(row[i],end="  ")
+#     print("")
 
 cursor.close()
 db.close()
 
-#image url이 너무 작다.
+#image url이 너무 작다. 수정 완료
 
 
    #해당 페이지 url 추가 생성 -> VO 추가 요망
