@@ -9,11 +9,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 #csv이식을 위한 코드 == 성공
-filename = "LAPTOP_LIST1-30.csv"
-f = open(filename,"w", encoding="utf-8-sig" , newline="")
-#newline을 안하면 엔터가 중간중간 들어간다. 줄바꿈을 없에준다.
-writer = csv.writer(f)
-#writer.writerow를 하고 list 형태를 넣으면 끝이다.
 
 browser = webdriver.Chrome()
 #다나와 접속
@@ -66,7 +61,12 @@ for pd in product :
 
 
     LAPTOP_NAME = title
-    CPU_NAME = list[4]
+    
+    if not (list[4].startswith('i')):
+        CPU_NAME = " "+list[4]
+    else:
+        CPU_NAME = list[4]
+
     GPU_NAME = "none"#test를 위해 cpu만 추출
     #test는 cpu로만 하고 gpu 외장 그래픽의 index 위치 추출하고,
     #그 다음 인덱스의 값을 그대로 빼오면 pgu_name 값.
@@ -127,8 +127,8 @@ db.commit()
 #         print(row[i],end="  ")
 #     print("")
 
-# cursor.close()
-# db.close()
+cursor.close()
+db.close()
 
 #image url이 너무 작다. 수정 완료
 #         #if i==3:

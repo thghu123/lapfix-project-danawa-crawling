@@ -11,9 +11,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 browser = webdriver.Chrome()
-#다나와 접속
-#url = "https://www.cpubenchmark.net/high_end_cpus.html"
-#url = "https://www.cpubenchmark.net/mid_range_cpus.html"
+
+
 #url = "https://www.videocardbenchmark.net/high_end_gpus.html"
 url = "https://www.videocardbenchmark.net/mid_range_gpus.html"
 
@@ -40,14 +39,14 @@ for cl in cpu_li :
 
     
 
-    cpu_name = cl.find("span", attrs = {"class":"prdname"}).get_text().strip()
+    gpu_name = cl.find("span", attrs = {"class":"prdname"}).get_text().strip()
 
-    if not (cpu_name.find("PRO") == -1) :
-        continue
+    # if not (cpu_name.find("PRO") == -1) :
+    #     continue
 
-    if cpu_name.startswith('Int'):
-        cpu_name = cpu_name.replace(" ","").strip()
-        cpu_name = cpu_name[0:(len(cpu_name))-8] #뒤의 @주파수부 잘라내기
+    # if cpu_name.startswith('Int'):
+    #     cpu_name = cpu_name.replace(" ","").strip()
+    #     cpu_name = cpu_name[0:(len(cpu_name))-8] #뒤의 @주파수부 잘라내기
  
            
            
@@ -55,13 +54,13 @@ for cl in cpu_li :
 
         
 
-    cpu_point = cl.find("span", attrs = {"class":"count"}).get_text().replace(",","").strip()
+    gpu_point = cl.find("span", attrs = {"class":"count"}).get_text().replace(",","").strip()
 
     # print(cpu_name)
     # print(cpu_point)
 
-    sql = "insert into cpu_bench values(:1,:2)"
-    data = (cpu_name,cpu_point)
+    sql = "insert into gpu_bench values(:1,:2)"
+    data = (gpu_name,gpu_point)
     cursor.execute(sql,data)
 
     # cnt = cnt+1

@@ -127,8 +127,8 @@ db.commit()
 #         print(row[i],end="  ")
 #     print("")
 
-# cursor.close()
-# db.close()
+cursor.close()
+db.close()
 
 #image url이 너무 작다. 수정 완료
 #         #if i==3:
