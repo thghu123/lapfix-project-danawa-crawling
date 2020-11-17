@@ -29,9 +29,6 @@ cpu_li = soup.find_all("li", attrs = {"id":re.compile("^rk")})
 
 # cnt = 0
 
-db=cx_Oracle.connect("class13/class13@nullmaster.iptime.org:1521/orcl")
-cursor = db.cursor()
-
 
 for cl in cpu_li :
     # if(cnt >= 20):
@@ -61,19 +58,9 @@ for cl in cpu_li :
         gpu_name = "none"
         gpu_point = 0
         print(gpu_name)
-    #danawa note 항목 중 TRX GPU 사용하는 노트북 없고, RX 계열과 중복되어 삭제
-
-    sql = "insert into gpu_bench values(:1,:2)"
-    data = (gpu_name,gpu_point)
-    cursor.execute(sql,data)
-
     # cnt = cnt+1
     
 
-db.commit()
-
-cursor.close()
-db.close()
 
 #cx_Oracle.DatabaseError: ORA-01722: invalid number
 #error -> 중간의 ,가 있기에 숫자로 인식하지 못한다.

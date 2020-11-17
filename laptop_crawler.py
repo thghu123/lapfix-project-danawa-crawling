@@ -144,8 +144,8 @@ for i in range(1,cnt_page+1):
         #출력 모두 성공
 
 
-
-        sql = "insert into laptop (LAPTOP_PRICE,LAPTOP_URL,LAPTOP_WEIGHT,LAPTOP_NAME,CPU_NAME,GPU_NAME,LAPTOP_MEMORY,LAPTOP_OS,LAPTOP_MONITORSIZE,LAPTOP_IMAGEURL) values(:1,:2,:3,:4,:5,:6,:7,:8,:9,:10)"
+        #노트북 중복을 없에 즐겨찾기에 저장하기 위해 f_key 포함
+        sql = "insert into laptop (f_key,LAPTOP_PRICE,LAPTOP_URL,LAPTOP_WEIGHT,LAPTOP_NAME,CPU_NAME,GPU_NAME,LAPTOP_MEMORY,LAPTOP_OS,LAPTOP_MONITORSIZE,LAPTOP_IMAGEURL) values(seq.NEXTVAL,:1,:2,:3,:4,:5,:6,:7,:8,:9,:10)"
         data = (LAPTOP_PRICE,LAPTOP_URL,LAPTOP_WEIGHT,LAPTOP_NAME,CPU_NAME,GPU_NAME,LAPTOP_MEMORY,LAPTOP_OS,LAPTOP_MONITORSIZE,LAPTOP_IMAGEURL)
         cursor.execute(sql,data)
         #n개 데이터만 빼오기 위함.
