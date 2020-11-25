@@ -22,7 +22,7 @@ elem = browser.find_element_by_xpath("//*[@id='productListArea']/div[5]/div/a").
 time.sleep(3)
 elem = browser.find_element_by_xpath("//*[@id='productListArea']/div[4]/div/a[2]").click()
 time.sleep(2)
-#//*[@id="productListArea"]/div[4]/div/a[2]
+elem = browser.find_element_by_xpath("//*[@id='productListArea']/div[4]/div/a[2]").click()
 
 #strong_cnt = 3 #인기순위 넘버가 없는 2페이지부터 strong의 1개값 삭감
 cnt = 0
@@ -43,9 +43,9 @@ cnt_page = 10 #검색할 페이지 수
 
 db=cx_Oracle.connect("class13/class13@nullmaster.iptime.org:1521/orcl")
 cursor = db.cursor()
-
+time.sleep(2)
 for i in range(1,cnt_page+1):
-    
+
     browser.find_element_by_class_name("num")
     # browser.find_element_by_link_text("{}".format(i)).click()
 
@@ -57,16 +57,15 @@ for i in range(1,cnt_page+1):
     #검색결과와 무관한 ad 광고를 제외한 태그 삭제 
     product = soup.find_all("li", attrs = {"class":"prod_item prod_layer"})
 
-
-    
-
-
     for pd in product :
         # if(cnt == 20):
         #     break
         cnt = cnt + 1
+ 
+            
         title = pd.find("p", attrs = {"class":"prod_name"}).get_text().replace("\n","").replace("\t","").replace("인기 순위","").strip()
         #해당 페이지 url 추가 생성 -> VO 추가 요망
+        print(title)
         spec = pd.find("dl", attrs = {"class":"prod_spec_set"}).get_text().replace("\n","").replace("\t","").replace("상세 스펙","")
         #replace대신 strip만 적어도 가능하다.
         
@@ -79,8 +78,9 @@ for i in range(1,cnt_page+1):
         laptop_url_a = pd.find("div", attrs = {"class":"thumb_image"})
         LAPTOP_URL = laptop_url_a.select("div.thumb_image > a")[0].get("href")
         
-        LAPTOP_PRICE = pd.find("p", attrs = {"class":"price_sect"}).get_text().replace(" ","").replace("가격정보 더보기","").replace("원","").replace(",","").replace("가격정보더보기","").replace("일시품절","0").strip()
-        #print(laptop_price_a)
+        LAPTOP_PRICE = pd.find("p", attrs = {"class":"price_sect"}).get_text().replace(" ","").replace("가격정보 더보기","").replace("원","").replace(",","").replace("가격정보더보기","").replace("일시품절","0").replace("가격비교예정","").strip()
+        #가격측정예정 글자 예외처리
+        #print(LAPTOP_PRICE)
         
         #print(LAPTOP_PRICE)
         #가끔 strong이 3번째있어 [4]여야할 때가 있네.
@@ -110,7 +110,7 @@ for i in range(1,cnt_page+1):
         GPU_NAME = "none"
         if any("외장그래픽" in gpu_word for gpu_word in list):
             GPU_NAME = list[(list.index("외장그래픽"))+1].replace(" ","").replace("라데온","").replace("쿼드로","")
-            print(GPU_NAME)
+            #print(GPU_NAME)
             
                 
 
@@ -125,10 +125,10 @@ for i in range(1,cnt_page+1):
             memory_matching=[s for s in list if "GB" in s][1]
         LAPTOP_MEMORY = memory_matching
 
-        LAPTOP_WEIGHT = [lw for lw in list if "무게:" in lw][0].strip().replace("무게:","").replace(".kg","").replace("kg","").replace(",",".")
+        LAPTOP_WEIGHT = [lw for lw in list if "무게:" in lw][0].strip().replace("무게:","").replace(".kg","").replace("kg","").replace(",",".").replace("최소 ","")
         if "g" in LAPTOP_WEIGHT:
             LAPTOP_WEIGHT = ("0."+LAPTOP_WEIGHT.replace("g","")).replace(" ","")
-        #print(LAPTOP_WEIGHT)
+        print(LAPTOP_WEIGHT)
 
         LAPTOP_OS = list[6][10:len(list[6])] 
         if (len(LAPTOP_OS) > 8):
