@@ -32,7 +32,7 @@ product = soup.find_all("li", attrs = {"class":"prod_item prod_layer"})
 time.sleep(2)
 
 cnt = 0
-db=cx_Oracle.connect("class13/class13@nullmaster.iptime.org:1521/orcl")
+db=cx_Oracle.connect("yourOracleAddress")
 cursor = db.cursor()
 
 for pd in product :

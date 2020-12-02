@@ -1,7 +1,7 @@
 
 import cx_Oracle
 
-db=cx_Oracle.connect("class13/class13@nullmaster.iptime.org:1521/orcl")
+db=cx_Oracle.connect("yourOracleAddress")
 cursor = db.cursor()
 
 sql = "select * from laptop"

@@ -22,7 +22,7 @@ cnt = 0
 cnt_page = 10 #검색할 페이지 수
 div = 5 #페이지 xpath안의 div값 2페이지 부터 4 1페이지에서만 5
 #10page 이상일 시에는 if i > 10 일 경우 browser.find 다음화살표.click()만 추가
-db=cx_Oracle.connect("class13/class13@nullmaster.iptime.org:1521/orcl")
+db=cx_Oracle.connect("yourOracleAddress")
 cursor = db.cursor()
 for i in range(1,cnt_page+1):
     

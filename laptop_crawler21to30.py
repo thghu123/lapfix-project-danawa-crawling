@@ -41,7 +41,7 @@ cnt_page = 10 #검색할 페이지 수
 # //*[@id="productListArea"]/div[4]/div/div/a[10]
 # 이후로 동일 
 
-db=cx_Oracle.connect("class13/class13@nullmaster.iptime.org:1521/orcl")
+db=cx_Oracle.connect("yourOracleAddress")
 cursor = db.cursor()
 
 for i in range(1,cnt_page+1):

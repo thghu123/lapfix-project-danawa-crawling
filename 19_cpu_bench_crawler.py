@@ -28,7 +28,7 @@ cpu_li = soup.find_all("li", attrs = {"id":re.compile("^rk")})
 #print(cpu_li)
 
 # cnt = 0
-db=cx_Oracle.connect("class13/class13@nullmaster.iptime.org:1521/orcl")
+db=cx_Oracle.connect("yourOracleAddress")
 cursor = db.cursor()
 
 
